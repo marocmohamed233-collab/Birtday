@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>حفلة عيد ميلادي</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+text-align:center;
+color:white;
+background:radial-gradient(circle,#ff4b2b,#ff416c);
+overflow:hidden;
+}
+
+h1{
+font-size:70px;
+margin-top:40px;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px white;}
+to{text-shadow:0 0 40px yellow;}
+}
+
+.cake{
+font-size:150px;
+animation:float 3s infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-20px);}
+100%{transform:translateY(0);}
+}
+
+.countdown{
+font-size:35px;
+margin:20px;
+}
+
+.gallery img{
+width:220px;
+border-radius:15px;
+margin:10px;
+box-shadow:0 10px 20px rgba(0,0,0,0.4);
+transition:0.3s;
+}
+
+.gallery img:hover{
+transform:scale(1.1);
+}
+
+button{
+padding:15px 40px;
+font-size:20px;
+border:none;
+border-radius:10px;
+background:white;
+color:#ff416c;
+cursor:pointer;
+}
+
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+top:-10px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10px);}
+100%{transform:translateY(100vh);}
+}
+
+.qr img{
+width:180px;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🎉 عيد ميلادي 🎉</h1>
+
+<div class="cake">🎂</div>
+
+<div id="countdown" class="countdown"></div>
+
+<button onclick="party()">ابدأ الاحتفال 🎆</button>
+
+<h2>📸 صور الحفلة</h2>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3">
+<img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d">
+<img src="https://images.unsplash.com/photo-1504198458649-3128b932f49b">
+
+</div>
+
+<div class="qr">
+
+<p>امسح الكود لزيارة الصفحة</p>
+
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://github.com">
+
+</div>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9d6e66.mp3">
+</audio>
+
+<script>
+
+let birthday = new Date("Mar 10, 2026 00:00:00").getTime();
+
+setInterval(function(){
+
+let now = new Date().getTime();
+
+let distance = birthday - now;
+
+let days = Math.floor(distance/(1000*60*60*24));
+let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+let minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+let seconds = Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("countdown").innerHTML =
+days+" يوم "+hours+" ساعة "+minutes+" دقيقة "+seconds+" ثانية";
+
+},1000);
+
+
+function party(){
+
+let music=document.getElementById("music");
+music.play();
+
+for(let i=0;i<250;i++){
+
+let conf=document.createElement("div");
+
+conf.className="confetti";
+
+conf.style.left=Math.random()*100+"vw";
+
+conf.style.backgroundColor="hsl("+Math.random()*360+",100%,50%)";
+
+conf.style.animationDuration=(Math.random()*3+2)+"s";
+
+document.body.appendChild(conf);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
